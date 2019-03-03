@@ -1,0 +1,72 @@
+body 
+  margin: 0
+  padding: 0
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace
+
+.App
+  display: flex
+  flex-direction: column
+
+.container
+  display: flex
+  padding: 0 100px 0 100px
+  min-height: calc(100vh - 140px)
+
+.header
+  display: flex
+  overflow: hidden
+  background: #0394ae
+  padding: 10px
+
+
+.sidebar
+  background: rgb(0, 174, 204)
+  flex-shrink: 0
+  width: 190px
+  padding-left: 10px
+
+.main
+  background: white
+  overflow-x: hidden
+  flex: 1 100%
+
+.footer
+  background: #0394ae
+  padding: 10px
+
+.family-section
+  padding: 10px 10px 20px 10px
+  h1
+    font-size: 20px
+    margin-bottom: 0 0 17px 0
+
+.sub-family-section
+  margin-bottom: 17px
+  h2
+    margin: 0 0 10px 0
+    font-size: 16px
+
+.sections-list
+  margin-left: 7px
+  font-size: 14px
+
+
+@media all and (max-width:1100px)
+  .container
+    padding: 0 80px 0 80px
+
+@media all and (max-width: 900px)
+  .container
+    padding: 0
+
+@media all and (max-width: 700px)
+  .container
+    flex-direction: column
+    padding: 0
+  .sidebar
+    width: auto
+    height: 50px
+  .sub-family-section > *
+    display: none
+  .main
+    min-height: calc(100vh - 110px)
