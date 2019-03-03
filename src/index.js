@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './style/index.sass'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import App from './components/App'
 import * as serviceWorker from './serviceWorker'
 import createRootReducer from './reducers'
