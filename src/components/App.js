@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-import Main from './Main'
+import Container from './Container'
 import Header from './Header'
-import Footer from './Footer'
-import Sidebar from './Sidebar'
 
 export default class App extends Component {
   constructor(props) {
@@ -10,21 +8,19 @@ export default class App extends Component {
 
     this.state = {
       searchbarContent: "",
-      searchResult: []
+      movies: []
     }
 
     this.url = "http://www.omdbapi.com/"
-    this.enterRequest = this.enterRequest.bind(this)
-    this.getMovies = this.getMovies.bind(this)
   }
 
-  enterRequest(e) {
+  enterRequest = (e) => {
     this.setState({
       searchbarContent: e.target.value
     })
   }
 
-  getMovies() {
+  getMovies = () => {
     return fetch(
       this.url + "?apikey=acb2afdb&s=" + encodeURIComponent(this.state.searchbarContent.trim()),
       {
@@ -32,27 +28,36 @@ export default class App extends Component {
       }
     )
       .then(resp => {return resp.json()})
-      .then(resp => {
-        console.log(resp)
-        return resp
-      })
+      // .then(resp => {
+      //   console.log(resp)
+      //   return resp
+      // })
       .then(resp => {
         this.setState({
-          searchResult: resp.Search
+          movies: resp.Search
         })
       })
+  }
+
+  componentDidMount() {
+    return fetch(
+      this.url + "?apikey=acb2afdb&s=star wars",
+      {
+        method: 'GET'
+      }
+    )
+      .then(resp => {return resp.json()})
+      .then(resp => this.setState({
+        movies: resp.Search
+      }))
   }
 
   render() {
     return (
       <div className="App">
-        <Header enterRequest={this.enterRequest} getMovies={this.getMovies}/>
+        <Header enterRequest={this.enterRequest} getMovies={this.getMovies} searchbarContent={this.state.searchbarContent}/>
 
-        <div className="container">
-        <Sidebar/>
-          <Main movies={this.state.searchResult}/>
-        </div>
-        <Footer />
+        <Container movies={this.state.movies}/>
       </div>
     )
   }
